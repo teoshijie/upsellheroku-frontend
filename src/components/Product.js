@@ -7,8 +7,7 @@ import {ListingConsumer} from '../context';
 class Product extends Component {
     
     render() { 
-          const {image, name, price, condition} = this.props.listing;
-
+          const {image_url, name, price, condition} = this.props.listing[0];
         return (
             
             <div className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -17,12 +16,12 @@ class Product extends Component {
                         className='img-container p-5' 
                         onClick={() => console.log('you clicked me on the image container')}>
                         <Link to="/details">
-                            <img src={image} alt='' className="card-img-top"/>
+                            <img src={image_url} alt='' className="card-img-top"/>
                         </Link>
                     </div>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                        <p className="card-text">${price}</p>
+                        <p className="card-text">${price.$numberDecimal}</p>
                         <p className="card-text">{condition}</p>
                     </div>
                 </div>
