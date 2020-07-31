@@ -9,3 +9,9 @@ body{
   font-family: 'Roboto', sans-serif;
   background-color: var(--mainWhite) !important;
 }
+
+.card {
+  border-color:transparent;
+  transition: all 1s linear;
+  
+}
