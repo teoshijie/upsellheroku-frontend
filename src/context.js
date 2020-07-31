@@ -20,10 +20,14 @@ class ListingProvider extends Component {
         fetch(BACKEND_URL)
             .then(response => response.json())
             .then(results => {
+                //console.log(results)
                 this.setState({
                     listings: results //reset the listings state to data fetched 
+                    
                 })
+                
             })
+            
        
     }
 

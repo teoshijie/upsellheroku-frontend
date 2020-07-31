@@ -4,8 +4,10 @@ import {ListingConsumer} from '../context';
 
 
 class ProductListing extends Component {
-    state={}
-        listings:[]
+      state = {
+          listings: []
+      };
+
     render() { 
         return ( 
             <React.Fragment>
@@ -16,17 +18,25 @@ class ProductListing extends Component {
                         <ListingConsumer>
                             {value => {
                                 return value.listings.map(listing => {
-                                    return <Product key={listing._id} listing= {listing} />
+                                    return <Product 
+                                    key={listing._id} 
+                                    listing= {[listing]}
+                                   
+         
+                                    />
                                 })
 
                             }}
+                            
                         </ListingConsumer>
+
+                        
                         
                     </div>
                 
                 </div>
             </div>
-
+        
             </React.Fragment>
             
             
