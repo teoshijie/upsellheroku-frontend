@@ -10,8 +10,6 @@ import Sell from './components/Sell';
 import EditListing from './components/EditListing';
 import PageNotFound from './components/PageNotFound';
 
-
-
 class App extends Component{
 
   render() {
@@ -20,7 +18,7 @@ class App extends Component{
           <Navbar />
           <Switch>
             <Route exact path="/" component={ProductListing} />
-            <Route path="/details" component={Details} />
+            <Route path="/:itemID/details" component={Details} />
             <Route path="/buynow" component={BuyNow} />
             <Route path='/sell' component={Sell}/>
             <Route path='/editlisting' component={EditListing} />

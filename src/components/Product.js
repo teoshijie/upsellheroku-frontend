@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 class Product extends Component {
     
     render() { 
-          const {image_url, name, price, condition} = this.props.listing[0];
+          const {_id, image_url, name, price, condition} = this.props.listing[0];
         return (
             
             <div className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -15,7 +15,7 @@ class Product extends Component {
                      <div 
                         className='img-container p-5 view overlay zoom' 
                         onClick={() => console.log('you clicked me on the image container')}>
-                        <Link to="/details">
+                        <Link to={`${_id}/details`}>
                             <img src={image_url} alt='' className="card-img-top"/>
                         </Link>
                     </div>

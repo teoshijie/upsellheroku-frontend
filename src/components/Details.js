@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL_LISTINGS || 'http://localhost:3000/listings';
+const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL_LISTINGS || 'http://localhost:3002/listings';
 
 class Details extends Component {
     constructor(props) {
         super(props)
         this.state = {
             itemID: this.props.match.params.itemID,
-            listings: null,
-            user: null
+            listings: null
         };
     }
 
@@ -17,7 +16,7 @@ class Details extends Component {
             .then(response => response.json())
             .then(results => {
                 this.setState({
-                    listings: results //reset the listings state to data fetched
+                    listings: results
                 })
             })
     }
@@ -37,9 +36,6 @@ class Details extends Component {
 
                         <h5 style={{ color: "#337ab7" }}>Description:</h5>
                         <div className="attr" style={{ textAlign: "justify" }}>{this.state.listings.description}</div>
-
-                        
-
                     </div>
 
                     <div className="col-xs-9" style={{ maxWidth: "25%" }}>
