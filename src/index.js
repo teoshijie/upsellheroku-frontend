@@ -4,16 +4,22 @@ import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {ListingProvider} from './context';
+import AuthProvider from './AuthContext';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
+  <AuthProvider>
   <ListingProvider>
     <Router>
       <App />
     </Router>
-  </ListingProvider>,
+  </ListingProvider>
+  </AuthProvider>,
   document.getElementById('root')
 );
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
