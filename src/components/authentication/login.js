@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import AuthService from "../../Services/AuthServices";
 import Message from './message';
 import { AuthContext } from '../../AuthContext';
+import {Link} from 'react-router-dom';
+
 
 const Login = props => {
     const [user, setUser] = useState({ username: "", password: "" });
@@ -32,7 +34,7 @@ const Login = props => {
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <h3>Please sign in</h3>
+                <h3>Please sign in/ Signup</h3>
                 <label htmlFor="username" className="sr-only">Username: </label>
                 <input type="text"
                     name="username"
@@ -48,6 +50,11 @@ const Login = props => {
                 <button className="btn btn-lg btn-primary btn-block"
                     type="submit">Log in </button>
             </form>
+
+            <Link to="/signup" className="nav-link">
+                Not a User? Sign Up here
+            </Link>
+
             {message ? <Message message={message} /> : null}
         </div>
     )
