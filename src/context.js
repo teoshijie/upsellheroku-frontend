@@ -4,7 +4,7 @@ const ListingContext = React.createContext();
 //Provider 
 //Consumer 
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
 
 
 class ListingProvider extends Component {
