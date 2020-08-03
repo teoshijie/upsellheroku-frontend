@@ -23,7 +23,7 @@ class Product extends Component {
                         <h5 className="card-title">{name}</h5>
                         <p className="card-text">${price.$numberDecimal}</p>
                         <p className="card-text">{condition}</p>
-                    <Link to='/buynow'>
+                    <Link to={`${_id}/buynow`}>
                         <button type='button' className="btn btn-danger">Buy Now</button>
                     </Link>
                     </div>
