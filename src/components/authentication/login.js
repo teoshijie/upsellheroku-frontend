@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import AuthService from "../../Services/AuthServices";
 import Message from './message';
 import { AuthContext } from '../../AuthContext';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Login = props => {
@@ -29,33 +29,38 @@ const Login = props => {
         });
     }
 
-
-
     return (
-        <div>
-            <form onSubmit={onSubmit}>
-                <h3>Please sign in/ Signup</h3>
-                <label htmlFor="username" className="sr-only">Username: </label>
-                <input type="text"
-                    name="username"
-                    onChange={onChange}
-                    className="form-control"
-                    placeholder="Enter Username" />
-                <label htmlFor="password" className="sr-only">Password: </label>
-                <input type="password"
-                    name="password"
-                    onChange={onChange}
-                    className="form-control"
-                    placeholder="Enter Password" />
-                <button className="btn btn-lg btn-primary btn-block"
-                    type="submit">Log in </button>
-            </form>
+        <div className="py-5">
+            <div className="container">
+                <div className="row">
+                    <form onSubmit={onSubmit}>
+                        <h3>Please log in</h3>
+                        <label htmlFor="username" className="sr-only">Username: </label>
+                        <input type="text"
+                            name="username"
+                            onChange={onChange}
+                            className="form-control"
+                            placeholder="Enter Username" />
+                        <label htmlFor="password" className="sr-only">Password: </label>
+                        <input type="password"
+                            name="password"
+                            onChange={onChange}
+                            className="form-control"
+                            placeholder="Enter Password" />
+                        <button className="btn btn-lg btn-primary btn-block"
+                            type="submit">Log in </button>
 
-            <Link to="/signup" className="nav-link">
-                Not a User? Sign Up here
-            </Link>
+                        <Link to="/signup" className="nav-link">
+                            Not a User? Sign Up here
+                            </Link>
 
-            {message ? <Message message={message} /> : null}
+                    </form>
+
+
+
+                    {message ? <Message message={message} /> : null}
+                </div>
+            </div>
         </div>
     )
 }

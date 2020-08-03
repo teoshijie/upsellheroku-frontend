@@ -21,19 +21,13 @@ class ProductListing extends Component {
                                     return <Product 
                                     key={listing._id} 
                                     listing= {[listing]}
-                                   
-         
                                     />
                                 })
 
                             }}
                             
                         </ListingConsumer>
-
-                        
-                        
                     </div>
-                
                 </div>
             </div>
         

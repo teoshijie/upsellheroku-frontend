@@ -32,7 +32,7 @@ class Details extends Component {
 
                     <div className="col-xs-5" style={{ border: "0px solid gray", maxWidth: "25%" }}>
                         <h3>{this.state.listings.name}</h3>
-                        <h5 style={{ color: "#337ab7" }}>category: {this.state.listings.category}</h5>
+                        <h5 style={{ color: "#337ab7" }}>Category: {this.state.listings.category}</h5>
 
                         <h5 style={{ color: "#337ab7" }}>Description:</h5>
                         <div className="attr" style={{ textAlign: "justify" }}>{this.state.listings.description}</div>
@@ -65,7 +65,8 @@ class Details extends Component {
                         <Link to='/'>
                             <button type='button' className="btn btn-danger" style={{ marginRight: "20px" }} >Go Back</button>
                         </Link>
-                        <Link to='/buynow'>
+
+                        <Link to='buynow'>
                             <button type='button' className="btn btn-danger">Buy Now</button>
                         </Link>
                         
