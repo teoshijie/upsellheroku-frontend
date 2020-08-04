@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-
-
-
+const BACKEND_URL_USERS = process.env.REACT_APP_BACKEND_URL_USERS || 'http://localhost:3002/users';
 
 class Product extends Component {
     
     render() { 
-          const {_id, image_url, name, price, condition} = this.props.listing[0];
+          const {_id, image_url, name, price, condition } = this.props.listing[0];
         return (
-            
             <div className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                 <div className="card" style={{width:"15rem", marginBottom:"15px"}}>
                      <div 
@@ -27,16 +24,8 @@ class Product extends Component {
                         <button type='button' className="btn btn-danger">Buy Now</button>
                     </Link>
                     </div>
-                    
-                    
                 </div>
-
             </div>
-            
-
-
-
-        
         );
     }
 }
