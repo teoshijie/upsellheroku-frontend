@@ -13,6 +13,7 @@ const Navbar = props => {
             if (data.success) {
                 setUser(data.user);
                 setIsAuthenticated(false);
+                this.props.history.push('/')
             }
         });
     }
@@ -110,9 +111,11 @@ const Navbar = props => {
         )
     }
     return (
-        <>
+        <nav>
+        <ul>
             {!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
-        </>
+        </ul>
+        </nav>
     )
 }
 
