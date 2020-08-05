@@ -11,7 +11,8 @@ class ListingProvider extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-             listings: [] //set initial state
+             listings: [], //set initial state
+             
     }
 }
 
@@ -27,17 +28,18 @@ class ListingProvider extends Component {
                 })
                 
             })
-            
-       
-    }
+               
+}
+
+    
 
 
     render() { 
         return (  
             <ListingContext.Provider value={{
-        ...this.state,
-
-            }}>
+                ...this.state,
+                
+            }}> 
             {this.props.children}
             </ListingContext.Provider>
         );
