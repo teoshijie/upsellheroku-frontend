@@ -1,5 +1,5 @@
 import React, { Component, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logo from '../favicon.png';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
@@ -13,7 +13,6 @@ const Navbar = props => {
             if (data.success) {
                 setUser(data.user);
                 setIsAuthenticated(false);
-                this.props.history.push('/')
             }
         });
     }

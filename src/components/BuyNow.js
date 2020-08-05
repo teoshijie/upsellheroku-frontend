@@ -36,7 +36,7 @@ const BuyNow = props => {
         }
     }
 
-    const unauthenticatedRender = () => {
+    const authenticatedRender = () => {
         return (
             (isLoaded) &&
             <div className="py-5">
@@ -122,7 +122,7 @@ const BuyNow = props => {
         )
     }
 
-    const authenticatedRender = () => {
+    const unauthenticatedRender = () => {
         return (
             <div className="py-5">
                 <div className="container">

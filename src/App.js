@@ -28,9 +28,9 @@ class App extends Component{
             <Route exact path="/" component={ProductListing} />
             <Route path="/:itemID/details" component={Details} />
             
-            <privateRoute path="/:itemID/buynow" component={BuyNow} />
-            <Route path="/sell" roles={["user"]} component={Sell} />
-            <Route path="/:itemID/editlisting" component={EditListing} />
+            <PrivateRoute path="/:itemID/buynow" component={BuyNow} />
+            <PrivateRoute path="/sell" roles={["user"]} component={Sell} />
+            <PrivateRoute path="/:itemID/editlisting" component={EditListing} />
             {/* <PrivateRoute path="/profile" component={Profile} /> */}
 
             <Route path="/login" component={Login}/>
