@@ -1,51 +1,87 @@
 import React, { Component } from 'react';
 
-const BACKEND_URL_LISTINGS_EDIT = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings/listingID';
+
+const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
 
 
 class EditListing extends Component {
-        constructor(props) {
-            super(props);
-        this.state = {
-            image_url: '',
-            name: '',
-            category: '',
-            decription: '',
-            quantity: 0,
-            price:0,
-            meetup: '',
-            condition: '',
-            listings: [],
-        }        
+    constructor(props) {
+        super(props);
+    this.state = {
+        itemID: this.props.match.params.itemID,
+        image_url: '',
+        name: '',
+        category: '',
+        decription: '',
+        quantity: 0,
+        price:0,
+        meetup: '',
+        condition: '',
+        listings: [],
+        
+    }        
+}
+
+
+componentDidMount() {
+
+    fetch(BACKEND_URL_LISTINGS + '/' + this.state.itemID)
+        .then(response => response.json())
+        .then(results => {
+            this.setState({
+                image_url: results.image_url,
+                name: results.name,
+                category: results.category,
+                decription: results.decription,
+                quantity: results.quantity,
+                price: results.price,
+                meetup: results.meetup,
+                condition: results.condition
+            }, () => {
+                console.log(this.state);
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        fetch(BACKEND_URL_LISTINGS + '/' + this.state.itemID, {
+            body: JSON.stringify({
+                image_url: this.state.image_url,
+                name: this.state.name,
+                category: this.state.category,
+                description: this.state.description,
+                quantity: this.state.quantity,
+                price: this.state.price,
+                meetup: this.state.meetup,
+                condition: this.state.condition
+        }),
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            
+            this.props.history.push('/');
+            window.location.reload();
+        }).catch(err => console.log(err));
     }
 
-    //fetch('todos/' + todo._id, {
-    
-        updateListing = () => {
-            fetch( BACKEND_URL_LISTINGS_EDIT + BACKEND_URL_LISTINGS_EDIT._id, {
-              body: JSON.stringify(listings),
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-              .then(() => {
-                fetch('/listingsID')  //fetch again the updated todo object and update the state to change the view 
-                  .then(response => response.json())
-                  .then(listings => {
-                      console.log(listings);
-                    this.setState({ listings: listings })
-                  });
-              })
-          }
-  
+
+
+    handleChange = (e) => {
+        this.setState({ [e.target.id] : e.target.value });
+    }
+
 
     render() { 
         const {image_url, name, category, description, quantity, price, meetup, condition} = this.state;
        
         return (  
             <div className="col-9 mx-auto col-md-6 col-lg-6 my-5">  
-                <h3>Upload Item To Sell</h3>
+                <h3>Edit Listing</h3>
                 <br />
                 <br />
                 
@@ -100,14 +136,14 @@ class EditListing extends Component {
                             </select>
                         </div>
                         <button className="btn btn-danger" type="submit" value="submit">Submit</button>  
-                                            
-                </form>     
+               </form>     
             </div>
             
-           
-        );
+       );
     }
 }
 
- 
 export default EditListing;
+
+
+

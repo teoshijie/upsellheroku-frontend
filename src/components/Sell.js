@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-const BACKEND_URL_LISTINGS_CREATE = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings/create';
+const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
 
 
 class Sell extends Component {
@@ -31,7 +31,7 @@ class Sell extends Component {
         handleSubmit = (event) => {
             event.preventDefault();
             
-            fetch(BACKEND_URL_LISTINGS_CREATE, {
+            fetch(BACKEND_URL_LISTINGS + '/create', {
                 body: JSON.stringify({
                     image_url: this.state.image_url,
                     name: this.state.name,
@@ -66,7 +66,9 @@ class Sell extends Component {
                     condition: '' 
 
                 })
-                this.props.history.push('/')
+                
+                this.props.history.push('/');
+                window.location.reload();
               }).catch(error => {
                 console.log(error);
               });    
@@ -74,8 +76,6 @@ class Sell extends Component {
         }
 
     
-  
-
     render() { 
         const {image_url, name, category, description, quantity, price, meetup, condition} = this.state;
        
