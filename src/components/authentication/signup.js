@@ -19,7 +19,7 @@ const Signup = props => {
     }
 
     const resetForm = () => {
-        setUser({ username: "", password: "", role: "" });
+        setUser({ username: "", password: ""});
     }
 
     const onSubmit = e => {
@@ -30,9 +30,7 @@ const Signup = props => {
             setMessage(message);
             resetForm();
             if (!message.msgError) {
-                timerID = setTimeout(() => {
-                    props.history.push('/signupsucess');
-                }, 2000)
+                props.history.push('/signupsucess');
             }
         });
     }

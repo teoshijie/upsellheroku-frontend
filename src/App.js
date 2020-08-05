@@ -13,7 +13,6 @@ import Login from './components/authentication/login';
 import LoginSuccess from './components/authentication/loginsuccess';
 import Signup from './components/authentication/signup';
 import SignUpSucess from './components/authentication/SignUpSuccess';
-import Profile from './components/profile';
 import {BrowserRouter as Router} from 'react-router-dom';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnPrivateRoute';
@@ -38,7 +37,7 @@ class App extends Component{
             <Route path = "/loginsuccess" component = {LoginSuccess}/>
             <Route path = "/signup" component={Signup}/>
             <Route path = "/signupsucess" component = {SignUpSucess}/>
-            
+      
             <Route component={PageNotFound} />
           </Switch>       
       </React.Fragment>
