@@ -111,11 +111,9 @@ const Navbar = props => {
         )
     }
     return (
-        <nav>
-        <ul>
+        <>
             {!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
-        </ul>
-        </nav>
+        </>
     )
 }
 

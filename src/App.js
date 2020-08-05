@@ -31,7 +31,7 @@ class App extends Component{
             <privateRoute path="/:itemID/buynow" component={BuyNow} />
             <Route path="/sell" roles={["user"]} component={Sell} />
             <Route path="/:itemID/editlisting" component={EditListing} />
-            <PrivateRoute path="/profile" component={Profile} />
+            {/* <PrivateRoute path="/profile" component={Profile} /> */}
 
             <Route path="/login" component={Login}/>
             <Route path = "/loginsuccess" component = {LoginSuccess}/>
