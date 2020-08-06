@@ -1,12 +1,13 @@
 
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
+//import {user} from '../AuthContext';
 
 const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
 
 
 class Sell extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             image_url: '',
             name: '',
@@ -73,8 +74,9 @@ class Sell extends Component {
 
 
     render() {
+        console.log(this.props)
         const { image_url, name, category, description, quantity, price, meetup, condition } = this.state;
-
+        
         return (
             <div className="col-9 mx-auto col-md-6 col-lg-6 my-5">
                 <h3>Upload Item To Sell</h3>

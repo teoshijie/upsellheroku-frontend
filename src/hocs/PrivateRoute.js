@@ -3,7 +3,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, user, userID } = useContext(AuthContext);
+    
     return (
         <Route {...rest} render={props => {
             if (!isAuthenticated) {
@@ -12,6 +13,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                     state: { from: props.location }
                 }} />
             } else {
+                console.log(userID)
+                console.log(user)
                 return (
                     <Route {...rest}
                         render={(props) =>
