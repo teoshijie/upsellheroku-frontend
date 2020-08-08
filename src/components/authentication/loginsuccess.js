@@ -16,7 +16,7 @@ class LoginSuccess extends Component {
                             </Link>
                         </h2>
                         <h2 className="nav-item ml=5">
-                            <Link to="/profile" className="nav-link">
+                            <Link to="/userID/profile" className="nav-link">
                                 My Profile
                             </Link>
                         </h2>
@@ -28,3 +28,4 @@ class LoginSuccess extends Component {
 }
 
 export default LoginSuccess;
+
