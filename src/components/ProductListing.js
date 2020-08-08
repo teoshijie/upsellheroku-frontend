@@ -4,10 +4,12 @@ import { ListingConsumer } from '../context';
 import Example from './Modal/example';
 
 class ProductListing extends Component {
-    state = {
-        listings: [],
-        showExample: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showExample: false
+        }
+    }
 
     render() {
         return (
@@ -19,7 +21,7 @@ class ProductListing extends Component {
                         <div className="row">
                             <ListingConsumer>
                                 {value => {
-                                    return value.listings.map(listing => {
+                                    return value.listings.filter(listing => !this.props.filter || listing.category === this.props.filter).map(listing => {
                                         return <Product
                                             key={listing._id}
                                             listing={[listing]}
@@ -30,10 +32,8 @@ class ProductListing extends Component {
                         </div>
                     </div>
                 </div>
-                <Example show={this.state.showExample} handleClose={()=>this.setState({showExample: false})} />
+                <Example show={this.state.showExample} handleClose={() => this.setState({ showExample: false })} />
             </React.Fragment>
-
-
         );
     }
 }

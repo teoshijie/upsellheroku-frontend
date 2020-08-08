@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListingService from "./Services/ListingServices";
 
 const ListingContext = React.createContext();
 //Provider 
@@ -10,43 +11,32 @@ const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL_LISTINGS || 'http
 class ListingProvider extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-             listings: [], //set initial state
-             
+        this.state = {
+            listings: [], //set initial state
+            filter: null
+        }
     }
-}
 
-//function to fetch data from backend server 
-    componentDidMount () {
-        fetch(BACKEND_URL_LISTINGS)
-            .then(response => response.json())
-            .then(results => {
-                //console.log(results)
-                this.setState({
-                    listings: results //reset the listings state to data fetched 
-                    
-                })
-                
+    //function to fetch data from backend server 
+    componentDidMount() {
+        ListingService.findAll().then(data => {
+            this.setState({
+                listings: data //reset the listings state to data fetched 
             })
-               
-}
+        })
+    }
 
-    
-
-
-    render() { 
-        return (  
+    render() {
+        return (
             <ListingContext.Provider value={{
                 ...this.state,
-                
-            }}> 
-            {this.props.children}
+            }}>
+                {this.props.children}
             </ListingContext.Provider>
         );
     }
 }
 
-
 const ListingConsumer = ListingContext.Consumer;
- 
-export {ListingProvider, ListingConsumer};
+
+export { ListingProvider, ListingConsumer };
