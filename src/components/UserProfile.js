@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ListingConsumer } from '../context';
-import Product from './Product';
+import UserProduct from './UserProduct';
 
 
 const BACKEND_URL_USERS = process.env.REACT_APP_BACKEND_URL_USERS || 'http://localhost:3002/users';
+const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL_LISTINGS || 'http://localhost:3002/listings';
 
 class UserProfile extends Component {
     constructor(props) {
         super(props)
         this.state = {
             userID: this.props.match.params.userID,
-            users: []
+            users: [],
+            listings: []
         };
     }
 
@@ -20,22 +21,35 @@ class UserProfile extends Component {
         fetch(BACKEND_URL_USERS + '/' + this.state.userID)
             .then(response => response.json())
             .then(results => {
-                console.log(results)
+                // console.log(results)
                 this.setState({
                     users : results
                 }, () => {
-                    console.log(this.state);
+                    this.getListingsByID();
                 });
             
             })
+    
+        
+
     }
 
-    
-    render() { 
+    getListingsByID = () => {
+        fetch(BACKEND_URL_LISTINGS + '/myListings' + '/' + this.state.userID)
+            .then(response => response.json())
+            .then(results => {
+                console.log(results)
+                this.setState({
+                    listings: results
+                })
+            })
+    }
 
-        
+
+
+render() {  
         return ( 
-
+            
         this.state.users &&   
         <div className="container-fluid py-5 ">
             <div className="row">
@@ -48,8 +62,8 @@ class UserProfile extends Component {
                     
                         <div style={{marginLeft:'85px', marginTop:'20px'}}>
                             <h4>{this.state.users.username}</h4>
-                            <h5>{this.state.users.email}</h5>
-                            <h5>mobile</h5>
+                            <h5>email: {this.state.users.email}</h5>
+                            <h5>mobile: {this.state.users.mobile}</h5>
                         </div>
 
                     </div>
@@ -59,17 +73,13 @@ class UserProfile extends Component {
                 <div className="col-9">
                     <div className="container">
                         <h1> My Listings</h1>
-                        <div className="row">
-                            <ListingConsumer>
-                                {value => {
-                                    return value.listings.map(listing => {
-                                        return <Product
-                                            key={listing._id}
-                                            listing={[listing]}
-                                        />
-                                    })
-                                }}
-                            </ListingConsumer>
+                        <div className="row"> 
+                            {this.state.listings.map(listing => 
+                                <UserProduct 
+                                    key={listing._id}
+                                    listing={[listing]}   
+                                />
+                            )}
                         </div>
                     </div>
 

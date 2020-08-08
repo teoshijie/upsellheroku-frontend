@@ -92,7 +92,7 @@ const Navbar = props => {
 
                     <ul className='navbar-nav align-item-center'>
                         <li className="nav-item ml-5">
-                            <Link to="/profile" className="nav-link">
+                            <Link to={`/${user._id}/userprofile`} className="nav-link">
                                 {user.username}
                             </Link>
                         </li>
