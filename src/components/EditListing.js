@@ -138,7 +138,6 @@ componentDidMount() {
                         <button className="btn btn-danger" type="submit" value="submit">Submit</button>  
                </form>     
             </div>
-            
        );
     }
 }

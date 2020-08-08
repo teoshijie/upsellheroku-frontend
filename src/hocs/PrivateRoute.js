@@ -13,8 +13,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                     state: { from: props.location }
                 }} />
             } else {
-                console.log(userID)
-                console.log(user)
                 return (
                     <Route {...rest}
                         render={(props) =>

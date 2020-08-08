@@ -1,14 +1,15 @@
-import React, { Component, useContext } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logo from '../favicon.png';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
+import { ButtonGroup, DropdownButton } from 'react-bootstrap';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 const Navbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
+    let [dropDownValue, setDropDownValue] = useState("Please select one of the following");
     const history = useHistory()
-    console.log(history)
-
 
     const onClickLogoutHandler = () => {
         AuthService.logout().then(data => {
@@ -19,16 +20,16 @@ const Navbar = props => {
         }})
     }
 
-    const onSell = e => {
-        e.preventDefault();
-        AuthService.create().then(data => {
-          console.log(data)
-        }).catch((err) => {
-            console.log(err)
-        })
+    const handleFilter = event => {
+        event.preventDefault();
+        if (event.target.id === "all") {
+            setDropDownValue(event.target.id);
+            props.setFilter(null);
+        } else {
+            setDropDownValue(event.target.id);
+            props.setFilter(event.target.id);
+        }
     }
-        
-    
 
     const unauthenticatedNavBar = () => {
         return (
@@ -47,11 +48,18 @@ const Navbar = props => {
                     </ul>
 
                     <div className="input-group">
-                        <div className="input-group-prepend">
-                            <div className="input-group-text" id="btnGroupAddon">@</div>
-                        </div>
-
-                        <input type="text" className="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon" />
+                        <ButtonGroup>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text" id="btnGroupAddon">Search by Category</div>
+                            </div>
+                            <DropdownButton as={ButtonGroup} key="secondary" id="dropdown-variants-secondary" variant="secondary" title={dropDownValue}>
+                                <DropdownItem id="all" key="all" onClick={(event) => { handleFilter(event) }}> all </DropdownItem>
+                                <DropdownItem id="shoes" key="shoes" onClick={(event) => { handleFilter(event) }}> shoes </DropdownItem>
+                                <DropdownItem id="fashion" key="fashion" onClick={(event) => { handleFilter(event) }}> fashion </DropdownItem>
+                                <DropdownItem id="bag" key="bag" onClick={(event) => { handleFilter(event) }}> bag </DropdownItem>
+                                <DropdownItem id="other" key="other" onClick={(event) => { handleFilter(event) }}> other </DropdownItem>
+                            </DropdownButton>
+                        </ButtonGroup>
                     </div>
 
 
@@ -95,11 +103,18 @@ const Navbar = props => {
                     </ul>
 
                     <div className="input-group">
-                        <div className="input-group-prepend">
-                            <div className="input-group-text" id="btnGroupAddon">@</div>
-                        </div>
-
-                        <input type="text" className="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon" />
+                        <ButtonGroup>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text" id="btnGroupAddon">Search by Category</div>
+                            </div>
+                            <DropdownButton as={ButtonGroup} key="secondary" id="dropdown-variants-secondary" variant="secondary" title={dropDownValue}>
+                                <DropdownItem id="all" key="all" onClick={(event) => { handleFilter(event) }}> all </DropdownItem>
+                                <DropdownItem id="shoes" key="shoes" onClick={(event) => { handleFilter(event) }}> shoes </DropdownItem>
+                                <DropdownItem id="fashion" key="fashion" onClick={(event) => { handleFilter(event) }}> fashion </DropdownItem>
+                                <DropdownItem id="bag" key="bag" onClick={(event) => { handleFilter(event) }}> bag </DropdownItem>
+                                <DropdownItem id="other" key="other" onClick={(event) => { handleFilter(event) }}> other </DropdownItem>
+                            </DropdownButton>
+                        </ButtonGroup>
                     </div>
 
 
@@ -116,7 +131,7 @@ const Navbar = props => {
 
                         <button type="button"
                             className="btn btn-link nav-item nav-link"
-                            onClick={onClickLogoutHandler}>Logout</button>
+                            onClick={onClickLogoutHandler} ><Link to="/">Logout</Link></button>
                     </ul>
                 </nav>
             </>

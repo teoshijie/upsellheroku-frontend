@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/Navbar';
@@ -17,27 +17,43 @@ import SignUpSucess from './components/authentication/SignUpSuccess';
 // import {BrowserRouter as Router} from 'react-router-dom';
 import PrivateRoute from './hocs/PrivateRoute';
 // import UnPrivateRoute from './hocs/UnPrivateRoute';
+import Modal from './components/Modal/Modal'
+
 
 
 class App extends Component{
       state = {
-        user: null
+        user: null,
+        filter: null,
+        showModal: false,
+        modalMessage: null
       }
 
 
       setUser = (e) => {
         this.setState({user: e})
       }
-
+      
+      onFilter = (event) => {
+        this.setState({filter: event});
+      }
+      
+      toggleModal = (event) => {
+        this.setState ({showModal: event});
+      }
+      
   render() {
     return (
       <React.Fragment>
-          <Navbar />
+            <Modal message={this.state.modalMessage} showModal={this.state.showModal} />
+              <Navbar setFilter={(event)=>this.onFilter(event)} />
           <Switch>
-            <Route exact path="/" component={ProductListing} />
+            <Route exact path="/" render={() => (
+            <ProductListing filter={this.state.filter} />
+          )} />
             <Route path="/:itemID/details" component={Details} />
 
-            <PrivateRoute path="/:itemID/buynow" component={BuyNow} />
+           <PrivateRoute toggleModal={(event)=>this.toggleModal(event)} path="/:itemID/buynow" component={BuyNow} />
             <PrivateRoute path="/sell" component={Sell} />
                 
             <PrivateRoute path="/:itemID/editlisting" component={EditListing} />
@@ -53,7 +69,7 @@ class App extends Component{
             <Route component={PageNotFound} />
           </Switch>       
       </React.Fragment>
-       
+
     );
   }
 }
