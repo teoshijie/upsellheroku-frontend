@@ -43,6 +43,10 @@ export default {
                     return { isAuthenticated: false, user: { username: "" } };
                 }
             })
+    },
+    findByID: (id) => {
+        return fetch(BACKEND_URL_USERS + '/' + id)
+            .then(response => response.json())
+            .then(data => data)
     }
-
 }

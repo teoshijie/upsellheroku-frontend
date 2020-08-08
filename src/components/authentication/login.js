@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react';
 import AuthService from "../../Services/AuthServices";
 import Message from './message';
-import { AuthContext} from '../../AuthContext';
+import { AuthContext } from '../../AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import loginsuccess from './loginsuccess';
 
-
-
 const Login = props => {
-   
+
     const [user, setUser] = useState({ username: "", password: "" });
     const [message, setMessage] = useState(null);
     const authContext = useContext(AuthContext);
@@ -19,23 +17,21 @@ const Login = props => {
 
     const onSubmit = e => {
         e.preventDefault();
-        AuthService.login(user).then(data => {
-            console.log(data);
-            const { isAuthenticated, user, message} = data;
-            if (isAuthenticated) {
-                authContext.setUser(user);
-                authContext.setIsAuthenticated(isAuthenticated);
-                handleUser(user);
-                history.push('/loginsuccess');
-                
-            }
-            else
-                setMessage(message);
-                console.log(message)
-        }).catch((err) => {
-            setMessage(err.message)
-            console.log('error message'+ message)
-        })
+        AuthService.login(user)
+            .then(data => {
+                const { isAuthenticated, user, message } = data;
+                if (isAuthenticated) {
+                    authContext.setUser(user);
+                    authContext.setIsAuthenticated(isAuthenticated);
+                    handleUser(user);
+                    history.push('/loginsuccess');
+                }
+                else
+                    setMessage(message);
+            }).catch((err) => {
+                setMessage(err.message)
+                console.log('error message' + message)
+            })
     }
 
     const handleUser = event => {
@@ -66,14 +62,9 @@ const Login = props => {
                         <Link to="/signup" className="nav-link">
                             Not a User? Sign Up here
                             </Link>
-
                     </form>
 
-
-
-                    {message ?                        
-                    <Message message={message} /> : null
-                    }
+                    {message ? <Message message={message} /> : null}
 
                 </div>
             </div>

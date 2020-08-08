@@ -37,8 +37,14 @@ const BuyNow = props => {
 
     const processOrder = (event) => {
         event.preventDefault()
+        let sum = parseFloat(quantity * items.price.$numberDecimal).toFixed(2);
         if (items.userID === user._id){
             window.alert("Error: You cannot buy your own item");
+        } else if (parseFloat(user.wallet.$numberDecimal) < sum ) {
+            console.log(sum);
+            console.log(user.wallet.$numberDecimal)
+            console.log(user.wallet.$numberDecimal < sum)
+            window.alert("Error: You have insufficient balance in your wallet");
         } else {
         const getTicketObject = (items) => {
             const {
@@ -60,9 +66,14 @@ const BuyNow = props => {
         let orderTicket = getTicketObject(items);
         orderTicket.seller_userID = items.userID;
         orderTicket.quantity = quantity;
-        orderTicket.amount = parseFloat(quantity * items.price.$numberDecimal).toFixed(2);
+        orderTicket.amount = sum;
         OrderService.submitOrder(orderTicket)
             .then(data => data)
+            .then(()=>{
+                window.alert("transaction submitted");
+                props.history.push('/');
+                window.location.reload();
+            })
         }
     }
 
@@ -100,11 +111,7 @@ const BuyNow = props => {
                                     <hr></hr>
                                     <h3 style={{ color: "#337ab7" }}>Payment Method</h3>
                                     <div className="form-group col-md-4">
-                                        <select className="form-control form-control-lg" id="payment">
-                                            <option value="cash" defaultValue>Cash</option>
-                                            <option value="paypal">Paypal</option>
-                                            <option value="grabpay">GrabPay</option>
-                                        </select>
+                                    <h4 style={{ fontWeight: "bold" }}>e-Wallet</h4>
                                     </div>
                                 </div>
                             </div>
@@ -167,14 +174,11 @@ const BuyNow = props => {
         )
     }
 
-
-
     return (
         <>
             {!isAuthenticated ? unauthenticatedRender() : authenticatedRender()}
         </>
     );
-
 }
 
 export default BuyNow;

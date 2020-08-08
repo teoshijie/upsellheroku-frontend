@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/users';
+import ListingService from "../Services/ListingServices";
+
 class Sell extends Component {
     constructor() {
         super();
@@ -20,45 +21,38 @@ class Sell extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        fetch(BACKEND_URL_LISTINGS + '/create', {
-            body: JSON.stringify({
-                image_url: this.state.image_url,
-                name: this.state.name,
-                category: this.state.category,
-                description: this.state.description,
-                quantity: this.state.quantity,
-                price: this.state.price,
-                meetup: this.state.meetup,
-                condition: this.state.condition
-            }),
-            credentials: 'include',
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+        const createListing = (object) => {
+            const {
+                name,
+                category,
+                description,
+                image_url,
+                price,
+                quantity,
+                condition,
+                meetup
+            } = object;
+            const listing = {
+                name,
+                category,
+                description,
+                image_url,
+                price,
+                quantity,
+                condition,
+                meetup
             }
-        }).then(createdListing => {
-            return createdListing.json();
-        }).then(jsonedListing => {
-            console.log(jsonedListing)
-            this.setState({
-                listings: [jsonedListing, ...this.state.listings],
-                //reset the form
-                image_url: '',
-                name: '',
-                category: '',
-                decription: '',
-                quantity: 0,
-                price: 0,
-                meetup: '',
-                condition: ''
+            return listing;
+        }
+        let createdListing = createListing(this.state);
+        ListingService.create(createdListing)
+            .then(data => data)
+            .then(() => {
+                this.props.history.push('/');
+                window.location.reload();
             })
-            this.props.history.push('/');
-            window.location.reload();
-        }).catch(error => {
-            console.log(error);
-        });
     }
+
     render() {
         const { image_url, name, category, description, quantity, price, meetup, condition } = this.state;
         return (

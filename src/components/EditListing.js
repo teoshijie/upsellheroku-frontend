@@ -9,16 +9,14 @@ class EditListing extends Component {
             image_url: '',
             name: '',
             category: '',
-            decription: '',
+            description: '',
             quantity: 0,
             price: 0,
             meetup: '',
             condition: '',
-            listings: [],
-
+            listings: []
         }
     }
-
 
     componentDidMount() {
         ListingService.findByID(this.state.itemID)
@@ -27,7 +25,7 @@ class EditListing extends Component {
                     image_url: results.image_url,
                     name: results.name,
                     category: results.category,
-                    decription: results.decription,
+                    description: results.description,
                     quantity: results.quantity,
                     price: results.price.$numberDecimal,
                     meetup: results.meetup,
@@ -41,79 +39,43 @@ class EditListing extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(event);
-        // const editListing = (object) => {
-        //     const {
-        //         name,
-        //         category,
-        //         description,
-        //         image_url,
-        //         price,
-        //         quantity,
-        //         condition,
-        //         meetup
-        //     } = object;
-        //     const listing = {
-        //         name,
-        //         category,
-        //         description,
-        //         image_url,
-        //         price,
-        //         quantity,
-        //         condition,
-        //         meetup
-        //     }
-        //     return listing;
-        // }
-        // let editedListing = editListing(event);
-        // ListingService.editByID(event.itemID, editedListing)
-        //     .then(data => data)
-        // const {
-        //     image_url: {this.state.image_url},
-        //     name: this.state.name,
-        //     category: this.state.category,
-        //     description: this.state.description,
-        //     quantity: this.state.quantity,
-        //     price: this.state.price,
-        //     meetup: this.state.meetup,
-        //     condition: this.state.condition
-        // }
-        // image_url: this.state.image_url,
-        //         name: this.state.name,
-        //         category: this.state.category,
-        //         description: this.state.description,
-        //         quantity: this.state.quantity,
-        //         price: this.state.price,
-        //         meetup: this.state.meetup,
-        //         condition: this.state.condition
-        // ListingService.editByID(this.state.itemID, data)
-        //     .then(data => data)
-
-        // fetch(BACKEND_URL_LISTINGS + '/' + this.state.itemID + '/update', {
-        //     body: JSON.stringify({
-
-        // }),
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(response => {
-
-        //     this.props.history.push('/');
-        //     window.location.reload();
-        // }).catch(err => console.log(err));
+        const editListing = (object) => {
+            const {
+                name,
+                category,
+                description,
+                image_url,
+                price,
+                quantity,
+                condition,
+                meetup
+            } = object;
+            const listing = {
+                name,
+                category,
+                description,
+                image_url,
+                price,
+                quantity,
+                condition,
+                meetup
+            }
+            return listing;
+        }
+        let editedListing = editListing(this.state);
+        ListingService.editByID(this.state.itemID, editedListing)
+            .then(data => data)
+            .catch(err => alert.window(err))
+        this.props.history.push('/');
+        window.location.reload();
     }
-
-
 
     handleChange = (e) => {
         this.setState({ [e.target.id]: e.target.value });
     }
 
-
     render() {
         const { image_url, name, category, description, quantity, price, meetup, condition } = this.state;
-
         return (
             <div className="col-9 mx-auto col-md-6 col-lg-6 my-5">
                 <h3>Edit Listing</h3>
@@ -178,6 +140,3 @@ class EditListing extends Component {
 }
 
 export default EditListing;
-
-
-

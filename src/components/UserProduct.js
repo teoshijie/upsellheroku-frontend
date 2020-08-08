@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
+import ListingService from "../Services/ListingServices";
 
 class UserProduct extends Component {
     state = {
         listings: []
     }
 
-
-
     deleteListing = (id) => {
-        fetch(BACKEND_URL_LISTINGS + '/' + id + '/delete',
-            {
-                method: 'DELETE'
-            })
+        ListingService.deleteByID(id)
             .then(window.location.reload())
-
     }
-
 
     render() {
         const { _id, image_url, name, price, condition } = this.props.listing[0];
@@ -42,9 +34,6 @@ class UserProduct extends Component {
                         <span style={{ marginLeft: '10px' }}>
                             <button onClick={() => this.deleteListing(_id)} type='button' className="btn btn-danger">Delete</button>
                         </span>
-
-
-
                     </div>
                 </div>
             </div>
