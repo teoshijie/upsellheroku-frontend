@@ -1,15 +1,19 @@
 import React, { useState, useContext } from 'react';
 import AuthService from "../../Services/AuthServices";
 import Message from './message';
-import { AuthContext } from '../../AuthContext';
-import { Link } from 'react-router-dom';
+import { AuthContext} from '../../AuthContext';
+import { Link, useHistory } from 'react-router-dom';
+import loginsuccess from './loginsuccess';
+
 
 
 const Login = props => {
+   
     const [user, setUser] = useState({ username: "", password: "" });
     const [message, setMessage] = useState(null);
     const authContext = useContext(AuthContext);
-
+    const [userID, setUserID] = useState(null);
+    const history = useHistory()
     const onChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
     }
@@ -18,15 +22,26 @@ const Login = props => {
         e.preventDefault();
         AuthService.login(user).then(data => {
             console.log(data);
-            const { isAuthenticated, user, message } = data;
+            const { isAuthenticated, user, message} = data;
             if (isAuthenticated) {
                 authContext.setUser(user);
+                authContext.setUserID(data.user._id);
                 authContext.setIsAuthenticated(isAuthenticated);
-                props.history.push('/loginsuccess');
+                handleUser(user);
+                history.push('/loginsuccess');
+                
             }
             else
                 setMessage(message);
-        });
+                console.log(message)
+        }).catch((err) => {
+            setMessage(err.message)
+            console.log('error message'+ message)
+        })
+    }
+
+    const handleUser = event => {
+        props.setUser(event);
     }
 
     return (
@@ -58,7 +73,10 @@ const Login = props => {
 
 
 
-                    {message ? <Message message={message} /> : null}
+                    {message ?                        
+                    <Message message={message} /> : null
+                    }
+
                 </div>
             </div>
         </div>

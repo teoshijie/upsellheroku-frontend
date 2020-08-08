@@ -1,23 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { Component, useContext, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../favicon.png';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
 import { ButtonGroup, DropdownButton } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
-
 const Navbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
     let [dropDownValue, setDropDownValue] = useState("Please select one of the following");
+    const history = useHistory()
 
     const onClickLogoutHandler = () => {
         AuthService.logout().then(data => {
             if (data.success) {
                 setUser(data.user);
                 setIsAuthenticated(false);
-            }
-        });
+                history.push('/')
+        }})
     }
 
     const handleFilter = event => {
@@ -120,14 +120,14 @@ const Navbar = props => {
 
                     <ul className='navbar-nav align-item-center'>
                         <li className="nav-item ml-5">
-                            <Link to="/profile" className="nav-link">
+                            <Link to={`/${user._id}/userprofile`} className="nav-link">
                                 {user.username}
                             </Link>
                         </li>
 
-                        <Link to='/sell' className="ml-5">
-                            <button type='button' className="btn btn-danger">SELL</button>
-                        </Link>
+                   
+                            <button type='button' onClick = {onSell} className="btn btn-danger">SELL</button>
+                    
 
                         <button type="button"
                             className="btn btn-link nav-item nav-link"
