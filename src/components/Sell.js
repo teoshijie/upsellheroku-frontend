@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
+const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/users';
 class Sell extends Component {
     constructor() {
         super();
@@ -31,6 +31,7 @@ class Sell extends Component {
                 meetup: this.state.meetup,
                 condition: this.state.condition
             }),
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',

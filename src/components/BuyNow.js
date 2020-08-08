@@ -37,7 +37,7 @@ const BuyNow = props => {
 
     const processOrder = (event) => {
         event.preventDefault()
-        if (items.userID = user._id){
+        if (items.userID === user._id){
             window.alert("Error: You cannot buy your own item");
         } else {
         const getTicketObject = (items) => {

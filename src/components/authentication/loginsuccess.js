@@ -15,11 +15,6 @@ class LoginSuccess extends Component {
                                 Go to homepage
                             </Link>
                         </h2>
-                        <h2 className="nav-item ml=5">
-                            <Link to="/userID/profile" className="nav-link">
-                                My Profile
-                            </Link>
-                        </h2>
                     </div>
                 </div>
             </div>

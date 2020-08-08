@@ -16,7 +16,6 @@ class UserProfile extends Component {
         };
     }
 
-    
     componentDidMount() {
         fetch(BACKEND_URL_USERS + '/' + this.state.userID)
             .then(response => response.json())
@@ -27,11 +26,7 @@ class UserProfile extends Component {
                 }, () => {
                     this.getListingsByID();
                 });
-            
             })
-    
-        
-
     }
 
     getListingsByID = () => {
@@ -45,8 +40,6 @@ class UserProfile extends Component {
             })
     }
 
-
-
 render() {  
         return ( 
             
@@ -57,7 +50,7 @@ render() {
                     <div className="container justify-content-center">
                         <div style={{marginLeft:'80px', marginTop:'75px'}}>
                             <img style={{width:"150px", height:"150px", borderRadius:"80px"}}
-                            src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"/>
+                            src="https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"/>
                         </div>
                     
                         <div style={{marginLeft:'85px', marginTop:'20px'}}>

@@ -92,14 +92,12 @@ const Signup = props => {
                             name="mobile"
                             onChange={onChange}
                             className="form-control"    
-                            pattern="[89][0-9]{8}"
+                            pattern="[89][0-9]{7}"
                             title = "Only accept Singapore mobile number starting with 9 or 8 and must have 9 digits"
                             placeholder="Mobile Number" />
                         <button className="btn btn-lg btn-primary btn-block"
                             type="submit">Sign Up</button>
                     </form>
-
-                    
                     {message ? <Message message={message} /> : null}
                 </div>
             </div>

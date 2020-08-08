@@ -17,7 +17,8 @@ const Navbar = props => {
                 setUser(data.user);
                 setIsAuthenticated(false);
                 history.push('/')
-        }})
+            }
+        })
     }
 
     const handleFilter = event => {
@@ -41,9 +42,11 @@ const Navbar = props => {
                     </Link>
                     <ul className='navbar-nav align-item-center'>
                         <li className="nav-item ml=5">
-                            <Link to="/" className="nav-link">
-                                PRODUCTS
+                            <div onClick={() => window.location.reload()}>
+                                <Link to="/" className="nav-link" >
+                                    PRODUCTS
                             </Link>
+                            </div>
                         </li>
                     </ul>
 
@@ -96,9 +99,11 @@ const Navbar = props => {
                     </Link>
                     <ul className='navbar-nav align-item-center'>
                         <li className="nav-item ml=5">
-                            <Link to="/" className="nav-link">
-                                PRODUCTS
+                            <div onClick={() => window.location.reload()}>
+                                <Link to="/" className="nav-link" >
+                                    PRODUCTS
                             </Link>
+                            </div>
                         </li>
                     </ul>
 
@@ -125,9 +130,9 @@ const Navbar = props => {
                             </Link>
                         </li>
 
-                   
+                        <Link to='/sell' className="ml-5">
                             <button type='button' className="btn btn-danger">SELL</button>
-                    
+                        </Link>
 
                         <button type="button"
                             className="btn btn-link nav-item nav-link"

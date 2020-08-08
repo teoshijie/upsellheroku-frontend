@@ -25,7 +25,7 @@ class EditListing extends Component {
 
 componentDidMount() {
 
-    fetch(BACKEND_URL_LISTINGS + '/' + this.state.itemID)
+    fetch(BACKEND_URL_LISTINGS + '/' + this.state.itemID + '/update')
         .then(response => response.json())
         .then(results => {
             this.setState({
