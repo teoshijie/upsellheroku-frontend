@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const Login = props => {
+   
     const [user, setUser] = useState({ username: "", password: "" });
     const [message, setMessage] = useState(null);
     const authContext = useContext(AuthContext);
@@ -26,7 +27,11 @@ const Login = props => {
             }
             else
                 setMessage(message);
-        });
+                console.log(message)
+        }).catch((err) => {
+            setMessage(err.message)
+            console.log('error message'+ message)
+        })
     }
 
     return (
@@ -58,7 +63,10 @@ const Login = props => {
 
 
 
-                    {message ? <Message message={message} /> : null}
+                    {message ?                        
+                    <Message message={message} /> : null
+                    }
+
                 </div>
             </div>
         </div>

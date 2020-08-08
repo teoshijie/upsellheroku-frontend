@@ -1,21 +1,34 @@
 import React, { Component, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../favicon.png';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
 
-
 const Navbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
+    const history = useHistory()
+    console.log(history)
+
 
     const onClickLogoutHandler = () => {
         AuthService.logout().then(data => {
             if (data.success) {
                 setUser(data.user);
                 setIsAuthenticated(false);
-            }
-        });
+                history.push('/')
+        }})
     }
+
+    const onSell = e => {
+        e.preventDefault();
+        AuthService.create().then(data => {
+          console.log(data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+        
+    
 
     const unauthenticatedNavBar = () => {
         return (
@@ -97,9 +110,9 @@ const Navbar = props => {
                             </Link>
                         </li>
 
-                        <Link to='/sell' className="ml-5">
-                            <button type='button' className="btn btn-danger">SELL</button>
-                        </Link>
+                   
+                            <button type='button' onClick = {onSell} className="btn btn-danger">SELL</button>
+                    
 
                         <button type="button"
                             className="btn btn-link nav-item nav-link"
