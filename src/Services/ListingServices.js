@@ -15,8 +15,16 @@ export default {
     create: () => {
         console.log("create");
     },
-    editByID: () => {
-        console.log("edit");
+    editByID: (itemID, data) => {
+        return fetch(BACKEND_URL_LISTINGS + '/' + itemID + '/update', {
+            body: JSON.stringify(data),
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => data);
     },
     deleteByID: () => {
         console.log("delete")
