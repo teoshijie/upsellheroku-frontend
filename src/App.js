@@ -21,53 +21,53 @@ import Modal from './components/Modal/Modal'
 
 
 
-class App extends Component{
-      state = {
-        user: null,
-        filter: null,
-        showModal: false,
-        modalMessage: null
-      }
+class App extends Component {
+  state = {
+    user: null,
+    filter: null,
+    showModal: false,
+    modalMessage: null
+  }
 
 
-      setUser = (e) => {
-        this.setState({user: e})
-      }
-      
-      onFilter = (event) => {
-        this.setState({filter: event});
-      }
-      
-      toggleModal = (event) => {
-        this.setState ({showModal: event});
-      }
-      
+  setUser = (e) => {
+    this.setState({ user: e })
+  }
+
+  onFilter = (event) => {
+    this.setState({ filter: event });
+  }
+
+  toggleModal = (event) => {
+    this.setState({ showModal: event });
+  }
+
   render() {
     return (
       <React.Fragment>
-            <Modal message={this.state.modalMessage} showModal={this.state.showModal} />
-              <Navbar setFilter={(event)=>this.onFilter(event)} />
-          <Switch>
-            <Route exact path="/" render={() => (
+        <Modal message={this.state.modalMessage} showModal={this.state.showModal} />
+        <Navbar setFilter={(event) => this.onFilter(event)} />
+        <Switch>
+          <Route exact path="/" render={() => (
             <ProductListing filter={this.state.filter} />
           )} />
-            <Route path="/:itemID/details" component={Details} />
+          <Route path="/:itemID/details" component={Details} />
 
-           <PrivateRoute toggleModal={(event)=>this.toggleModal(event)} path="/:itemID/buynow" component={BuyNow} />
-            <PrivateRoute path="/sell" component={Sell} />
-                
-            <PrivateRoute path="/:itemID/editlisting" component={EditListing} />
-            <PrivateRoute path="/:userID/userprofile" component={UserProfile} />
+          <PrivateRoute toggleModal={(event) => this.toggleModal(event)} path="/:itemID/buynow" component={BuyNow} />
+          <PrivateRoute path="/sell" component={Sell} />
 
-            <Route path="/login"  render={() => (
-              <Login setUser={(event)=>this.setUser(event)} />
-            )} />
-            <Route path = "/loginsuccess" component = {LoginSuccess}/>
-            <Route path = "/signup" component={Signup}/>
-            <Route path = "/signupsucess" component = {SignUpSucess}/>
-      
-            <Route component={PageNotFound} />
-          </Switch>       
+          <PrivateRoute path="/:itemID/editlisting" component={EditListing} />
+          <PrivateRoute path="/:userID/userprofile" component={UserProfile} />
+
+          <Route path="/login" render={() => (
+            <Login setUser={(event) => this.setUser(event)} />
+          )} />
+          <Route path="/loginsuccess" component={LoginSuccess} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/signupsucess" component={SignUpSucess} />
+
+          <Route component={PageNotFound} />
+        </Switch>
       </React.Fragment>
 
     );

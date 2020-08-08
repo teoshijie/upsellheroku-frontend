@@ -12,7 +12,6 @@ const Login = props => {
     const [user, setUser] = useState({ username: "", password: "" });
     const [message, setMessage] = useState(null);
     const authContext = useContext(AuthContext);
-    const [userID, setUserID] = useState(null);
     const history = useHistory()
     const onChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -25,7 +24,6 @@ const Login = props => {
             const { isAuthenticated, user, message} = data;
             if (isAuthenticated) {
                 authContext.setUser(user);
-                authContext.setUserID(data.user._id);
                 authContext.setIsAuthenticated(isAuthenticated);
                 handleUser(user);
                 history.push('/loginsuccess');

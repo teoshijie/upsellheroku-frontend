@@ -62,8 +62,7 @@ const BuyNow = props => {
         orderTicket.quantity = quantity;
         orderTicket.amount = parseFloat(quantity * items.price.$numberDecimal).toFixed(2);
         OrderService.submitOrder(orderTicket)
-            .then(data => { data
-            })
+            .then(data => data)
         }
     }
 

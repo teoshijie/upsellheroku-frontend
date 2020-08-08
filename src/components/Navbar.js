@@ -126,7 +126,7 @@ const Navbar = props => {
                         </li>
 
                    
-                            <button type='button' onClick = {onSell} className="btn btn-danger">SELL</button>
+                            <button type='button' className="btn btn-danger">SELL</button>
                     
 
                         <button type="button"
