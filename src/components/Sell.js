@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/listings';
+const BACKEND_URL_LISTINGS = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002/users';
 
 
 class Sell extends Component {
